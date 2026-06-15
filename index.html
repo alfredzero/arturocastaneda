@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arturo Castañeda — Taller de Arte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --terracotta: #C25E3D;
+      --terracotta-dark: #A64D30;
+      --plaster-white: #F7F4EF;
+      --adobe-sand: #E8E0D5;
+      --mission-brown: #5C4033;
+      --adobe-graphite: #4A4540;
+      --wrought-iron: #6E665F;
+      --dust-gray: #A8A199;
+      --clay-border: #D9CFC2;
+      --tile-cream: #E6DCCF;
+      --cobalt: #1E4D8C;
+      --sage: #7A8B6E;
+      --ochre: #D4A35A;
+      --transition: 0.4s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Source Sans 3', -apple-system, Arial, sans-serif;
+      background-color: var(--plaster-white);
+      color: var(--adobe-graphite);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      color: var(--mission-brown);
+      font-weight: 600;
+      line-height: 1.19;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      background: transparent;
+      transition: background-color var(--transition), box-shadow var(--transition);
+    }
+
+    .nav.scrolled {
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--mission-brown);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--mission-brown);
+      padding: 6px 16px;
+      border-radius: 8px;
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    .nav-links a:hover {
+      background-color: var(--adobe-sand);
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      transition: background-color var(--transition);
+      color: var(--mission-brown);
+    }
+
+    .icon-btn:hover {
+      background-color: var(--adobe-sand);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--mission-brown);
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background:
+        linear-gradient(rgba(92, 64, 51, 0.40), rgba(92, 64, 51, 0.40)),
+        url('arturo.jpeg') center/cover no-repeat;
+      color: var(--plaster-white);
+      padding: 0 24px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      color: var(--plaster-white);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      font-size: clamp(18px, 2.5vw, 22px);
+      margin-bottom: 32px;
+      opacity: 0.95;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 32px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color var(--transition), background-color var(--transition), color var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--terracotta);
+      color: var(--plaster-white);
+      width: 220px;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--terracotta-dark);
+    }
+
+    .btn-secondary {
+      background-color: var(--plaster-white);
+      color: var(--adobe-graphite);
+      width: 180px;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--adobe-sand);
+    }
+
+    /* Sections */
+    section {
+      padding: 96px 32px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(30px, 4vw, 42px);
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--wrought-iron);
+      font-size: 17px;
+    }
+
+    /* Featured Works */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .work-card {
+      background: var(--plaster-white);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--clay-border);
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .work-card:hover {
+      border-color: var(--tile-cream);
+    }
+
+    .work-card {
+      position: relative;
+    }
+
+    .work-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    .work-card.sold img {
+      filter: grayscale(25%);
+    }
+
+    .sold-badge {
+      position: absolute;
+      top: 24px;
+      right: -58px;
+      width: 230px;
+      background: var(--sage);
+      color: var(--plaster-white);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 12px 0;
+      transform: rotate(45deg);
+      z-index: 2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .work-info {
+      padding: 24px;
+    }
+
+    .work-info h3 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .work-info .medium {
+      font-size: 14px;
+      color: var(--wrought-iron);
+      margin-bottom: 16px;
+    }
+
+    .work-info .price {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--mission-brown);
+      margin-bottom: 16px;
+    }
+
+    .work-info .btn {
+      width: 100%;
+    }
+
+    /* About */
+    .about {
+      background-color: var(--adobe-sand);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .about-image {
+      border-radius: 16px 16px 12px 12px;
+      overflow: hidden;
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-text h2 {
+      font-size: clamp(30px, 4vw, 42px);
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      margin-bottom: 16px;
+      color: var(--adobe-graphite);
+    }
+
+    .about-text .signature {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 28px;
+      color: var(--mission-brown);
+      margin-top: 24px;
+    }
+
+    /* Categories */
+    .categories {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: 16px 16px 12px 12px;
+      overflow: hidden;
+      min-height: 360px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 28px;
+    }
+
+    .category-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .category-card span {
+      position: relative;
+      z-index: 1;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--plaster-white);
+      background: rgba(92, 64, 51, 0.45);
+      padding: 8px 16px;
+      border-radius: 8px;
+    }
+
+    /* Visit / Contact */
+    .visit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .visit-card {
+      background: var(--plaster-white);
+      border: 1px solid var(--clay-border);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .visit-card .icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      background: var(--adobe-sand);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--mission-brown);
+    }
+
+    .visit-card h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .visit-card p {
+      color: var(--wrought-iron);
+      font-size: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--mission-brown);
+      color: var(--adobe-sand);
+      padding: 64px 32px 32px;
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand h2 {
+      color: var(--plaster-white);
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      color: var(--tile-cream);
+      font-size: 15px;
+    }
+
+    .footer-links h4 {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--plaster-white);
+      margin-bottom: 16px;
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--tile-cream);
+      font-size: 14px;
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--plaster-white);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid rgba(230, 220, 207, 0.2);
+      font-size: 14px;
+      color: var(--tile-cream);
+    }
+
+    /* Persistent concierge bar */
+    .concierge {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--plaster-white);
+      border-top: 1px solid var(--clay-border);
+      padding: 12px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 90;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+    }
+
+    .concierge-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 1200px;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .concierge-label {
+      font-weight: 600;
+      color: var(--mission-brown);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .concierge input {
+      flex: 1;
+      min-width: 220px;
+      max-width: 400px;
+      padding: 10px 16px;
+      border: 1px solid var(--clay-border);
+      border-radius: 8px;
+      background: var(--plaster-white);
+      color: var(--mission-brown);
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .concierge input::placeholder {
+      color: var(--dust-gray);
+    }
+
+    .concierge .btn {
+      min-height: 40px;
+      padding: 8px 20px;
+      width: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      .categories {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      section {
+        padding: 72px 20px;
+      }
+      .nav {
+        padding: 16px 20px;
+      }
+      .concierge {
+        padding: 12px 20px;
+      }
+      .concierge-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .concierge input {
+        max-width: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a href="#" class="nav-logo">Arturo Castañeda</a>
+    <ul class="nav-links">
+      <li><a href="#obras">Obras</a></li>
+      <li><a href="#taller">Taller</a></li>
+      <li><a href="#colecciones">Colecciones</a></li>
+      <li><a href="#visita">Visita</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a href="#" class="icon-btn" aria-label="Buscar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      </a>
+      <a href="#" class="icon-btn" aria-label="Carrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      </a>
+      <button class="mobile-menu-btn" aria-label="Menú">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1>Arturo Castañeda</h1>
+      <p>Artista visual con más de 15 años de trayectoria, radicado en Potrerillos, Guadalajara, Jalisco. Su obra dialoga con la luz, la tierra y el silencio del paisaje tapatío.</p>
+      <div class="hero-buttons">
+        <a href="#obras" class="btn btn-primary">Comprar obras</a>
+        <a href="#visita" class="btn btn-secondary">Visitar taller</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="obras">
+    <div class="section-header">
+      <h2>Obras destacadas</h2>
+      <p>Cada pieza es una conversación entre el color de la tierra, la textura del estuco y la memoria del paisaje.</p>
+    </div>
+    <div class="works-grid">
+      <article class="work-card sold">
+        <span class="sold-badge">Vendido</span>
+        <img src="vendido.jpeg" alt="Pintura de guerrero con águila enmarcada">
+        <div class="work-info">
+          <h3>El Mensajero del Sol</h3>
+          <p class="medium">Acrílico sobre lienzo, enmarcado</p>
+          <p class="price" style="text-decoration: line-through; color: var(--dust-gray);">Vendido</p>
+          <a href="#contacto" class="btn btn-secondary">Consultar obra similar</a>
+        </div>
+      </article>
+      <article class="work-card sold">
+        <span class="sold-badge">Vendido</span>
+        <img src="vendido2.jpeg" alt="Mural de la Sagrada Familia">
+        <div class="work-info">
+          <h3>Sagrada Familia</h3>
+          <p class="medium">Acrílico sobre muro</p>
+          <p class="price" style="text-decoration: line-through; color: var(--dust-gray);">Vendido</p>
+          <a href="#contacto" class="btn btn-secondary">Consultar obra similar</a>
+        </div>
+      </article>
+      <article class="work-card" style="background: var(--adobe-sand); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 32px;">
+        <div style="width: 64px; height: 64px; background: var(--tile-cream); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--mission-brown); margin-bottom: 20px;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"></path><path d="M3 12h18"></path></svg>
+        </div>
+        <h3 style="margin-bottom: 8px;">Obra bajo encargo</h3>
+        <p style="color: var(--wrought-iron); margin-bottom: 24px; max-width: 260px;">¿Tienes una idea o un espacio? Arturo puede crear una pieza única para ti.</p>
+        <a href="#contacto" class="btn btn-primary">Platicar proyecto</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="taller" class="about">
+    <div class="about-content">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=1000&auto=format&fit=crop" alt="Artista trabajando en su taller">
+      </div>
+      <div class="about-text">
+        <h2>Sobre el artista</h2>
+        <p>Arturo Castañeda es un artista visual radicado en Potrerillos, Guadalajara, Jalisco, con más de 15 años de trayectoria profesional. Su trabajo busca capturar el silencio cálido del paisaje tapatío: la luz que entra por un arco, la textura del estuco desgastado, el color de la tierra después de la lluvia.</p>
+        <p>Lo que hace especial a Arturo es que es sordo mudo, una condición que nunca lo ha detenido. A lo largo de su carrera ha desarrollado un lenguaje visual propio, expresivo y sensible, donde la pintura, la escultura y el dibujo se convierten en su voz. En su taller, cada obra comienza con una caminata: observa, siente y traduce el mundo en imágenes que hablan sin necesidad de palabras.</p>
+        <p class="signature">Arturo Castañeda</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="colecciones">
+    <div class="section-header">
+      <h2>Colecciones</h2>
+      <p>Explora series temáticas inspiradas en arquitectura, paisaje y memoria.</p>
+    </div>
+    <div class="categories">
+      <a href="#" class="category-card">
+        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?q=80&w=1200&auto=format&fit=crop" alt="Arcos y pasillos de una misión">
+        <span>Arquitectura Misional</span>
+      </a>
+      <a href="#" class="category-card">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop" alt="Paisaje desértico al atardecer">
+        <span>Tierra y Cielo</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="visita">
+    <div class="section-header">
+      <h2>Visita el taller en Potrerillos</h2>
+      <p>Abierto a coleccionistas, curadores y visitantes que quieran conocer el proceso de cerca, en el corazón de Guadalajara.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <h3>Ubicación</h3>
+        <p>Taller Potrerillos<br>Potrerillos, Guadalajara, Jal.<br>México</p>
+      </div>
+      <div class="visit-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <h3>Horario</h3>
+        <p>Martes a sábado<br>10:00 — 18:00<br>Visitas previa cita los lunes</p>
+      </div>
+      <div class="visit-card">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+        </div>
+        <h3>Contacto</h3>
+        <p>hola@arturocastaneda.art<br>+52 33 1234 5678<br>Instagram: @arturocastaneda<br><em>Comunicación preferente por mensaje de texto, email o WhatsApp.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h2>Arturo Castañeda</h2>
+        <p>Taller de arte en Potrerillos, Guadalajara, Jalisco. Obras pintadas a mano por Arturo Castañeda, artista con más de 15 años de trayectoria.</p>
+      </div>
+      <div class="footer-links">
+        <h4>TIENDA</h4>
+        <ul>
+          <li><a href="#">Obras originales</a></li>
+          <li><a href="#">Ediciones</a></li>
+          <li><a href="#">Obra sobre papel</a></li>
+          <li><a href="#">Regalos</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>ESTUDIO</h4>
+        <ul>
+          <li><a href="#">Sobre el artista</a></li>
+          <li><a href="#">Proceso</a></li>
+          <li><a href="#">Prensa</a></li>
+          <li><a href="#">Exposiciones</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>AYUDA</h4>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Arturo Castañeda. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="concierge">
+    <div class="concierge-inner">
+      <span class="concierge-label">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Pregunta al taller
+      </span>
+      <input type="text" placeholder="¿Tienes una pregunta sobre una obra?">
+      <button class="btn btn-primary">Enviar</button>
+      <a href="#visita" class="btn btn-secondary" style="width:auto;">Agendar visita</a>
+    </div>
+  </div>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
