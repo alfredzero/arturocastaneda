@@ -401,6 +401,44 @@
       border-radius: 8px;
     }
 
+    /* Sculpture before/after */
+    .sculpture-compare {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .compare-card {
+      position: relative;
+      border-radius: 16px 16px 12px 12px;
+      overflow: hidden;
+      border: 1px solid var(--clay-border);
+      background: var(--plaster-white);
+    }
+
+    .compare-card img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .compare-label {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(92, 64, 51, 0.78);
+      color: var(--plaster-white);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
     /* Visit / Contact */
     .visit-grid {
       display: grid;
@@ -601,6 +639,12 @@
       .concierge input {
         max-width: none;
       }
+      .sculpture-compare {
+        grid-template-columns: 1fr;
+      }
+      .compare-card img {
+        height: 320px;
+      }
     }
   </style>
 </head>
@@ -611,7 +655,7 @@
     <ul class="nav-links">
       <li><a href="#obras">Obras</a></li>
       <li><a href="#taller">Taller</a></li>
-      <li><a href="#colecciones">Colecciones</a></li>
+      <li><a href="#escultura">Escultura</a></li>
       <li><a href="#visita">Visita</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -690,20 +734,20 @@
     </div>
   </section>
 
-  <section id="colecciones">
+  <section id="escultura">
     <div class="section-header">
-      <h2>Colecciones</h2>
-      <p>Explora series temáticas inspiradas en arquitectura, paisaje y memoria.</p>
+      <h2>Escultura</h2>
+      <p>Del barro a la forma: el proceso de transformación de cada pieza escultórica en el taller.</p>
     </div>
-    <div class="categories">
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?q=80&w=1200&auto=format&fit=crop" alt="Arcos y pasillos de una misión">
-        <span>Arquitectura Misional</span>
-      </a>
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=800&auto=format&fit=crop" alt="Paisaje desértico al atardecer">
-        <span>Tierra y Cielo</span>
-      </a>
+    <div class="sculpture-compare">
+      <div class="compare-card">
+        <img src="antes.jpeg" alt="Escultura en proceso, antes del trabajo final">
+        <span class="compare-label">Antes</span>
+      </div>
+      <div class="compare-card">
+        <img src="despues.jpeg" alt="Escultura terminada, después del trabajo final">
+        <span class="compare-label">Después</span>
+      </div>
     </div>
   </section>
 
